@@ -108,8 +108,8 @@ sudo docker compose down
 sudo apt install snapd
 sudo snap install microk8s --channel=1.29/stable --classic
 sudo microk8s status --wait-ready
-sudo usermod -a -G microk8s desktop
-sudo chown -f -R desktop ~/.kube
+sudo usermod -a -G microk8s desktop # <your username: desktop>
+sudo chown -f -R desktop ~/.kube  # <your username: desktop>
 
 # Enable kubectl autocompletion
 kubectl='microk8s kubectl'
