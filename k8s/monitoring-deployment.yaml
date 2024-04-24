@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s/
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    io.kompose.service: monitoring
+  name: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: monitoring
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o k8s/
+        kompose.version: 1.32.0 (765fde254)
+      labels:
+        io.kompose.network/chapter14-default: "true"
+        io.kompose.service: monitoring
+    spec:
+      containers:
+        - args:
+            - --config.file=/etc/prometheus/prometheus.yml
+          image: prom/prometheus
+          name: monitoring
+          ports:
+            - containerPort: 9090
+              hostPort: 9090
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /etc/prometheus
+              name: config-volume
+      restartPolicy: Always
+      # volumes:
+      #   - name: monitoring-claim0
+      #     persistentVolumeClaim:
+      #       claimName: monitoring-claim0
+      volumes:
+        - name: config-volume
+          configMap:
+            name: prometheus-config
