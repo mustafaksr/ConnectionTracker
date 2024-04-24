@@ -115,6 +115,7 @@ microk8s enable metallb:10.64.140.43-10.64.140.49
 2. Verify Installation:
 
 ```bash
+microk8s start
 kubectl get pods --all-namespaces 
 ```
 
