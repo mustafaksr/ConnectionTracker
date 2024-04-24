@@ -207,8 +207,6 @@ Save & Test
 ```
 ### Result
 
-<iframe src="Kubernetes-Dashboard.pdf" width="100%" height="500" frameborder="0">
-
 <object data="Kubernetes-Dashboard.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="Kubernetes-Dashboard.pdf">
         <p>This browser does not support PDFs. Please download the PDF to view it: <a href="Kubernetes-Dashboard.pdf">Download PDF</a>.</p>
