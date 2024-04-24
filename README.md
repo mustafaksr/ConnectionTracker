@@ -84,6 +84,12 @@ db.mycollection.insertMany([
 db.mycollection.find().pretty()
 ```
 
+- Remove all.
+
+```bash
+sudo docker compose down
+```
+
 ## Kubernetes
 
 ### Installation Steps
@@ -204,6 +210,12 @@ Save & Test
 #prometheus connection
 Prometheus server URL: 10.152.183.78:9090  #your monitoring service clusterip:9090 or externalip:9090
 Save & Test
+```
+
+7. Clean up.
+
+```bash
+kubectl delete namespace connection-tracker
 ```
 ### Result
 
