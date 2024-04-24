@@ -6,9 +6,13 @@ Welcome to the ConnectionTracker application repository! This repository provide
 
 ConnectionTracker is a versatile application designed to track and manage connections across various components of a system. It offers features such as monitoring, logging, and database management, making it a valuable tool for developers and system administrators alike.
 
+Essentially, the ConnectionTracker app records and displays web connections from its web interface, storing pertinent information such as ID, device, and time in a PostgreSQL database. Additionally, it generates basic logs using Prometheus client counters and supports Grafana for efficient monitoring of these logs. 
+
 In this repository, you'll find detailed guides and configuration files to deploy ConnectionTracker using Docker Compose for local development and testing environments. Additionally, we provide Kubernetes manifests for deploying ConnectionTracker in a production-ready Kubernetes cluster, ensuring scalability, resilience, and ease of management.
 
 Whether you're a developer looking to set up a local development environment using Docker Compose or an operations engineer deploying a distributed application on Kubernetes, this repository has you covered. Follow the instructions below to get started with deploying ConnectionTracker in your preferred environment.
+
+ 
 
 ## Docker Compose
 
