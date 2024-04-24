@@ -1,0 +1,93 @@
+# version: '3'
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    # ports:
+    #   - "5432:5432" # Map container port 5432 to host port 5432
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'mustafakeser@zoho.com' # you may change
+      PGADMIN_DEFAULT_PASSWORD: 123456
+    ports:
+      - "5050:80"
+
+  webapp:
+    # build:
+    #   context: ./webapp
+    image: web_app_compose
+    environment:
+      DATABASE_URL: postgres://postgres:123456@postgres:5432/postgres
+    ports:
+      - "2000:2000"
+    depends_on:
+      - postgres
+      # - rabbitmq
+    # command: bash -c "python app.py && python publisher.py"  # Run your app and the publisher
+  
+        
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "7050:7050"
+    depends_on:
+      - postgres
+
+
+  monitoring:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus:/etc/prometheus  # Correct the volume mapping
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    ports:
+      - "9090:9090"
+
+
+  logging:
+    image: grafana/grafana
+    environment:
+      GF_INSTALL_PLUGINS: grafana-piechart-panel
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: 123456
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+  mongodb:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongodb_data:/data/db  # Use a volume to persist MongoDB data
+    ports:
+      - "27017:27017"
+  #mongosh -u root -p password
+
+
+
+  # rabbitmq:
+  #   image: rabbitmq
+  #   ports:
+  #     - "5672:5672"  # RabbitMQ port
+
+  # consumer:
+  #   build:
+  #     context: ./consumer  # Adjust the context to the directory containing consumer.py
+  #   depends_on:
+  #     - rabbitmq  # Make sure the RabbitMQ service is running before starting the consumer
+
+volumes:
+  postgres_data: # Define the named volume for PostgreSQL data
+  grafana_data:  # Define the named volume for Grafana data
+  mongodb_data:  # Define the named volume for MongoDB data
