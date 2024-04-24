@@ -1,0 +1,23 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['monitoring:9090']
+
+  - job_name: 'postgresql'
+    static_configs:
+      - targets: ['postgres:5432'] 
+
+  - job_name: 'webapp'
+    static_configs:
+      - targets: ['webapp:2000']  # Use the service name and port for your webapp
+
+  - job_name: 'backend'
+    static_configs:
+      - targets: ['backend:7050']  # Use the service name and port for your backend
+  
+  - job_name: 'mongodb'
+    static_configs:
+      - targets: ['mongodb:27017']
