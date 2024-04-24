@@ -18,6 +18,10 @@ Whether you're a developer looking to set up a local development environment usi
 
 ### Setup and Deployment
 
+```bash
+git clone https://github.com/mustafaksr/ConnectionTracker.git
+```
+
 1. Navigate to the root directory of the project.
 2. Run the following command to start the services:
 
